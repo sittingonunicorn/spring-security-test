@@ -1,7 +1,6 @@
 package com.gmail.sittingonunicorn.springsecuritytest.entity;
 
 
-import com.google.common.collect.ImmutableList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -20,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,11 +42,10 @@ public class User  implements UserDetails {
     private boolean enabled;
 
     @Override
-    public ImmutableList<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> result = new ArrayList<>();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> result = new HashSet<>();
         result.add(this.getRole());
-        return (ImmutableList<? extends GrantedAuthority>) Collections.unmodifiableList(result);
-
+        return result;
     }
 
 }
