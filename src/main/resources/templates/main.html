@@ -10,8 +10,14 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
-<h4 th:text="#{message.language}"></h4>
-<a th:href="@{/index(language='en_US')}" th:text="#{language.en}"></a>
-<a th:href="@{/index(language='ua_UA')}" th:text="#{language.ua}"></a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 th:text="#{message.welcome}" > Hello</h4>
+            <h4 th:text="${username}">User</h4>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
